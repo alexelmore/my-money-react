@@ -11,7 +11,7 @@ export default function Login() {
 		if ((password !== "") & (email !== "")) {
 			alert(`Password:${password}. Email:${email}`);
 		} else {
-			alert("Go FUCK yo self!");
+			alert("Nope!");
 		}
 	};
 

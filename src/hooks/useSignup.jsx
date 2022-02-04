@@ -8,7 +8,7 @@ export const useSignup = () => {
 	const [isPending, setIsPending] = useState(false);
 
 	// Destructure Auth Context Hook
-	const { state, dispatch } = useAuthContext();
+	const { dispatch } = useAuthContext();
 
 	// Funtion that gets invoked whenever we want to sign a user up.
 	const signup = async (email, password, displayName) => {
@@ -40,7 +40,6 @@ export const useSignup = () => {
 
 			// Catch error if there is one and reset error and pending states
 		} catch (err) {
-			console.log(err.message);
 			setError(err.message);
 			setIsPending(false);
 		}

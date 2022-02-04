@@ -7,20 +7,21 @@ export const authReducer = (state, action) => {
 		case "LOG_IN":
 			return { ...state, user: action.payload };
 		case "LOG_OUT":
-			return { ...state, user: action.payload };
+			return { ...state, user: null };
 		default:
 			return state;
 	}
 };
 
 // Auth Context Provider Component
-export function AuthProvider({ children }) {
+export const AuthProvider = ({ children }) => {
 	// State for Auth Context Reducer
 	const [state, dispatch] = useReducer(authReducer, {
 		user: null,
 	});
 
-	console.log("AuthContext state:", state);
+	console.log("context state:", state);
+
 	return (
 		<AuthContext.Provider
 			value={{
@@ -31,4 +32,4 @@ export function AuthProvider({ children }) {
 			{children}
 		</AuthContext.Provider>
 	);
-}
+};
