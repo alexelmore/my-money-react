@@ -23,7 +23,8 @@ export default function Navbar() {
 						</li>
 					</>
 				) : (
-					<li>
+					<li style={{ display: "flex", alignItems: "center" }}>
+						<p>{`What's good, ${user.displayName}?`}</p>
 						<button onClick={logout} className="btn">
 							Logout
 						</button>
