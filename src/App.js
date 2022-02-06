@@ -1,4 +1,4 @@
-import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
 import { useAuthContext } from './hooks/useAuthContext';
 import Home from './pages/home/Home';
 import Signup from './pages/signup/Signup';
@@ -7,7 +7,7 @@ import Navbar from './components/Navbar';
 
 function App() {
   // Destructure the authIsReady property from our useAuthContext hook 
-  const { authIsReady } = useAuthContext();
+  const { user, authIsReady } = useAuthContext();
 
   // Object that holds the loading screen styles
   const loadingStyle =
@@ -31,15 +31,16 @@ function App() {
           <Navbar />
           <Switch>
             <Route exact path="/">
-              <Home />
+              {user ? <Home /> : <Redirect to="/login" />}
+
             </Route>
 
             <Route path="/signup">
-              <Signup />
+              {!user ? <Signup /> : <Redirect to="/" />}
             </Route>
 
             <Route path="/login">
-              <Login />
+              {!user ? <Login /> : <Redirect to="/" />}
             </Route>
 
           </Switch>
