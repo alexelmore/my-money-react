@@ -24,7 +24,10 @@ export default function Navbar() {
 					</>
 				) : (
 					<li style={{ display: "flex", alignItems: "center" }}>
-						<p>{`What's good, ${user.displayName}?`}</p>
+						<p>{`Greetings, ${
+							user.displayName.charAt(0).toUpperCase() +
+							user.displayName.slice(1)
+						}!`}</p>
 						<button onClick={logout} className="btn">
 							Logout
 						</button>
