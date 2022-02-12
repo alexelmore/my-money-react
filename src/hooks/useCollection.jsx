@@ -1,14 +1,21 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { projectFirestore } from "../firebase/config";
 
-export const useCollection = (collection) => {
+export const useCollection = (collection, _query) => {
 	// State
 	const [documents, setDocuments] = useState(null);
 	const [error, setError] = useState(null);
 
+	// Setup a reference to the query array that is being passed in using the useRef hook's current property
+	const query = useRef(_query).current;
+
 	// useEffect hook that fires whenever the collection changes
 	useEffect(() => {
 		let ref = projectFirestore.collection(collection);
+		// Check if there is a query, if so, call the fb where method and spread and pass the query to it.
+		if (query) {
+			ref = ref.where(...query);
+		}
 		const unsubscribe = ref.onSnapshot(
 			(snapshot) => {
 				let results = [];
@@ -27,7 +34,7 @@ export const useCollection = (collection) => {
 		);
 		// Clean up function for the unsubscribe event
 		return () => unsubscribe();
-	}, [collection]);
+	}, [collection, query, error]);
 	// Return documents and error from our hook
 	return { documents, error };
 };
