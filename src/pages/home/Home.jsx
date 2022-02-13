@@ -9,11 +9,11 @@ export default function Home() {
 
 	// Destructure useCollection Hook and pull out the documents and error state
 	// Pass in a second argument to the useCollection hook, which is an array setting up a query to retrieve the user specific transaction(s)
-	const { documents, error } = useCollection("transactions", [
-		"uid",
-		"==",
-		user.uid,
-	]);
+	const { documents, error } = useCollection(
+		"transactions",
+		["uid", "==", user.uid],
+		["createdAt", "desc"]
+	);
 	return (
 		<div className={styles.container}>
 			<div className={styles.content}>
