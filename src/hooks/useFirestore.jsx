@@ -26,6 +26,13 @@ const firestoreReducer = (state, action) => {
 				success: true,
 				error: null,
 			};
+		case "DELETED_DOC":
+			return {
+				isPending: false,
+				document: null,
+				success: true,
+				error: null,
+			};
 		case "HAS_ERROR":
 			return {
 				isPending: false,
@@ -68,7 +75,7 @@ export const useFirestore = (collection) => {
 			// Make request to add document to firestore db
 			const addedDocument = await ref.add({ ...document, createdAt });
 			// Call  dispatchIfNotCancelled function and pass it the action type and document for its payload
-			dispatchIfNotCancelled({ type: "ADDED_DOC", addedDocument });
+			dispatchIfNotCancelled({ type: "ADDED_DOC", payload: addedDocument });
 		} catch (error) {
 			dispatchIfNotCancelled({
 				type: "HAS_ERROR",
@@ -78,8 +85,23 @@ export const useFirestore = (collection) => {
 	};
 
 	// Function to remove a document to the projectFirestore collection
-	const removeDocument = async (docId) => {
-		console.log("remove");
+	const deleteDocument = async (docId) => {
+		// Dispatch the "IS_PENDING" action
+		dispatch({
+			type: "IS_PENDING",
+		});
+
+		try {
+			// Make request to delete document from firestore db
+			await ref.doc(docId).delete();
+			// Call  dispatchIfNotCancelled function and pass it the action type and document for its payload
+			dispatchIfNotCancelled({ type: "DELETED_DOC" });
+		} catch (error) {
+			dispatchIfNotCancelled({
+				type: "HAS_ERROR",
+				payload: error.message,
+			});
+		}
 	};
 
 	// useEffect hook used for a clean up function
@@ -87,5 +109,5 @@ export const useFirestore = (collection) => {
 		return () => setIsCancelled(true);
 	}, []);
 
-	return { addDocument, removeDocument, response };
+	return { addDocument, deleteDocument, response };
 };
