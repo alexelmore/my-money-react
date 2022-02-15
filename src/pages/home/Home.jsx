@@ -19,7 +19,7 @@ export default function Home() {
 			<div
 				className={styles.content}
 				style={
-					documents.length === 0
+					documents === null || documents.length === 0
 						? { display: "flex", alignItems: "center" }
 						: {}
 				}
