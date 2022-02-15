@@ -16,16 +16,17 @@ export default function Home() {
 	);
 	return (
 		<div className={styles.container}>
-			<div className={styles.content}>
+			<div
+				className={styles.content}
+				style={
+					documents.length === 0
+						? { display: "flex", alignItems: "center" }
+						: {}
+				}
+			>
 				{error && <p>{error}</p>}
-				{documents ? (
-					<TransactionList transactions={documents} />
-				) : (
-					<p>
-						No Transactions for
-						{user.displayName.charAt(0).toUpperCase() +
-							user.displayName.slice(1)}
-					</p>
+				{documents && (
+					<TransactionList name={user.displayName} transactions={documents} />
 				)}
 			</div>
 			<div className={styles.sidebar}>
