@@ -1,6 +1,6 @@
 .signup-form {
-	max-width: 360px;
-	margin: 60px auto;
+	max-width: 15rem;
+	margin: auto;
 	padding: 20px;
 }
 .signup-form label {
@@ -16,4 +16,12 @@
 	font-size: 1em;
 	color: #777;
 	width: 100%;
+}
+
+/* Desktop */
+@media only screen and (min-width: 890px) {
+	.signup-form {
+		max-width: 360px;
+		margin: 60px auto;
+	}
 }

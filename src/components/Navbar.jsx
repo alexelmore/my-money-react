@@ -10,10 +10,9 @@ export default function Navbar() {
 
 	return (
 		<nav className={styles.navbar}>
-			<ul>
-				<li className={styles.title}>myMoney</li>
-
-				{user === null ? (
+			{user === null ? (
+				<ul style={{ display: "flex" }}>
+					<li className={styles.title}>myMoney</li>
 					<>
 						<li>
 							<Link to="/login">Login</Link>
@@ -22,7 +21,10 @@ export default function Navbar() {
 							<Link to="/signup">Sign Up</Link>
 						</li>
 					</>
-				) : (
+				</ul>
+			) : (
+				<ul style={{ display: "block" }}>
+					<li className={styles.title}>myMoney</li>
 					<li style={{ display: "flex", alignItems: "center" }}>
 						<p>{`Greetings, ${
 							user.displayName.charAt(0).toUpperCase() +
@@ -32,8 +34,8 @@ export default function Navbar() {
 							Logout
 						</button>
 					</li>
-				)}
-			</ul>
+				</ul>
+			)}
 		</nav>
 	);
 }
