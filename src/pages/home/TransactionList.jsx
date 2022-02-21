@@ -10,6 +10,9 @@ export default function TransactionList({ transactions, name }) {
 					<li key={transaction.id}>
 						<p className={styles.name}>{transaction.transaction}</p>
 						<p className={styles.amount}>${transaction.amount}</p>
+						<p>
+							<u>{transaction.createdAt.toDate().toDateString()}</u>
+						</p>
 						<button onClick={() => deleteDocument(transaction.id)}>x</button>
 					</li>
 				))
