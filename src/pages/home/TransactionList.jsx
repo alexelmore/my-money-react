@@ -8,10 +8,20 @@ export default function TransactionList({ transactions, name }) {
 			{transactions.length ? (
 				transactions.map((transaction) => (
 					<li key={transaction.id}>
-						<p className={styles.name}>{transaction.transaction}</p>
+						<p className={styles.name}>
+							{transaction.transaction}
+							{}
+						</p>
 						<p className={styles.amount}>${transaction.amount}</p>
-						<p>
-							<u>{transaction.createdAt.toDate().toDateString()}</u>
+						<p className={styles.date}>
+							<strong>
+								{transaction.createdAt
+									.toDate()
+									.toDateString()
+									.split(" ")
+									.slice(1)
+									.join(" ")}
+							</strong>
 						</p>
 						<button onClick={() => deleteDocument(transaction.id)}>x</button>
 					</li>

@@ -64,6 +64,7 @@
 	box-shadow: 3px 3px 5px rgba(50, 50, 50, 0.1);
 	padding: 20px;
 	display: flex;
+	justify-content: space-between;
 	align-items: center;
 	position: relative;
 	overflow: hidden;
@@ -72,13 +73,17 @@
 .transactions .name {
 	color: #777;
 	font-size: 1.4em;
+	margin-right: 20px;
 }
 .transactions .amount {
-	margin-left: auto;
-	margin-right: 40px;
+	margin-right: 20px;
 	color: #777;
 	font-weight: bold;
 	font-size: 1.6em;
+}
+
+.transactions .date {
+	text-align: center;
 }
 .transactions button {
 	position: absolute;
@@ -106,5 +111,13 @@
 	}
 	.sidebar {
 		padding-left: 30px;
+	}
+
+	.transactions .name {
+		margin-right: 0;
+	}
+
+	.transactions .amount {
+		margin-right: 0;
 	}
 }
